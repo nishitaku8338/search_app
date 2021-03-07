@@ -15,10 +15,21 @@ _lteq	     「〜以下」という検索条件
 
 ransackを導入しましょう
 まずは、Gemfileを以下のように編集してください。
+# Gemfile
 # ファイルの一番下に追記しましょう
 gem 'ransack'
 
 編集したら、以下のコマンドを実行しましょう。
+# ターミナル
 % bundle install
 
 
+ルーティングを設定しましょう
+# config/routes.rb
+Rails.application.routes.draw do
+  root 'products#index'
+  get 'products/search'
+end
+
+今回は、商品検索の機能を実装するので「productsコントローラー」とします。
+また、検索機能は「searchアクション」と命名します。

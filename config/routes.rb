@@ -1,3 +1,4 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root 'products#index'  # 商品検索の機能を実装productsコントローラー
+  get 'products/search'  # 検索機能はsearchアクションと命名
 end
