@@ -33,3 +33,35 @@ end
 
 今回は、商品検索の機能を実装するので「productsコントローラー」とします。
 また、検索機能は「searchアクション」と命名します。
+
+
+モデルを生成しよう
+今回は「productモデル」と「categoryモデル」の2つを生成します。
+合わせて、それぞれのテーブルに値を保存する方法についても理解を深めましょう。
+
+モデルを生成しましょう
+まずは、categoryモデルを生成してコントローラーを実装するための準備をしましょう。
+
+以下のコマンドを実行してください。
+
+ターミナル
+% rails g model category
+
+以下のファイルが生成されていれば成功です。
+
+app/models/category.rb
+db/migrate/**************_create_categories.rb
+
+他にも数点ファイルが生成されます。
+
+続いて、productモデルを生成します。
+以下のコマンドを実行してください。
+
+ターミナル
+% rails g model product
+
+以下のファイルが生成されていれば成功です。
+
+app/models/product.rb
+db/migrate/**************_create_products.rb
+他にも数点ファイルが生成されます。
