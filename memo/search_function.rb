@@ -86,3 +86,12 @@ class Product < ApplicationRecord
   belongs_to :category
 
 end
+
+
+マイグレーションファイルを編集
+カテゴリーのみ「categoriesテーブル」の情報を参照するので
+「foreign_key: true」として外部キー制約をかけています。
+
+商品情報とカテゴリー情報をDBに入れるにあたってseedファイルというものを使用する
+
+
