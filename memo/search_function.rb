@@ -65,3 +65,24 @@ db/migrate/**************_create_categories.rb
 app/models/product.rb
 db/migrate/**************_create_products.rb
 他にも数点ファイルが生成されます。
+
+
+アソシエーションを設定しましょう
+商品は1つのカテゴリーに属し、カテゴリーには複数の商品が存在しています。
+よって、「商品とカテゴリー」の関係性は「1対多」となります。
+
+それでは、モデルファイルを以下のように編集してください。
+
+app/models/category.rb
+class Category < ApplicationRecord
+
+  has_many :products
+
+end
+
+app/models/product.rb
+class Product < ApplicationRecord
+
+  belongs_to :category
+
+end
