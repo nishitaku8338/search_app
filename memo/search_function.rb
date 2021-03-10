@@ -109,3 +109,27 @@ seedファイルは、
 % rails db:seed
 
 各テーブルにデータが保存されていれば成功。
+
+
+続いて、productsコントローラーの生成です。以下のコマンドを実行してください。
+
+ターミナル
+% rails g controller products index search
+
+今回は2つのアクションしか使わないので、最後に「index」「search」とアクションを指定しています。
+
+以下のファイルが生成されていれば成功です。
+
+app/controllers/products_controller.rb
+app/views/products/index.html.erb
+app/views/products/search.html.erb
+他にも数点ファイルが生成されます。
+ここで、コントローラーを編集する前にransackの使用上の注意点があります。
+
+検索パラメーター（検索する際に入力した内容のこと）のキーを、初期設定では「:q」とします。この「:q」とは「query（質問する）」のイニシャルのことです。
+
+詳細は、以下のリンクから確認しましょう。
+（参照：公式ドキュメント）
+https://github.com/activerecord-hackery/ransack
+それでは実装に移りましょう。
+
