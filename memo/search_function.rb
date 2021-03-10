@@ -249,3 +249,53 @@ urlは「rails routes」を実行して確認しましょう。
 
 それでは実装しましょう。
 
+
+重複している商品名を解消しましょう
+app/controllers/products_controller.rb
+class ProductsController < ApplicationController
+
+  before_action :search_product, only: [:index, :search]
+
+  def index
+    @products = Product.all
+    set_product_column       # privateメソッド内で定義
+  end
+
+  （省略）
+
+  private
+
+ （省略）
+
+  def set_product_column
+    @product_name = Product.select("name").distinct  # 重複なくnameカラムのデータを取り出す
+  end
+
+end
+
+17行目では、
+productsテーブルの中のnameカラムを選択（select）して、
+「@product_name」というインスタンス変数に代入しています。
+この「distinctメソッド」が、
+DBからレコードを取得する際に重複したものを削除してくれるメソッドです。
+
+そして、
+この処理をするメソッドを「set_product_column」と命名したものを、
+7行目で実行しています。
+
+次に、index.html.erbの6行目を以下のように編集してください。
+app/views/products/index.html.erb
+（省略）
+
+<%= f.collection_select :name_eq, @product_name, :name, :name, include_blank: '指定なし' %>
+
+（省略）>
+
+先ほどまでは@productsの情報を配列に入れていましたが、
+今回は@product_nameの情報（商品名に重複がない）を引数として持たせています。
+
+ここまで実装できたら、
+localhost:3000にアクセスして確かめましょう。
+
+現状ではどのような商品があるかが分からないままなので、
+検索対象となる商品を一覧表示しましょう。
