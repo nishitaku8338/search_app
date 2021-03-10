@@ -1,0 +1,50 @@
+<h1>
+  商品検索
+</h1>
+<%= search_form_for @p, url: products_search_path do |f| %>
+  <%= f.label :name_eq, '商品名' %>
+  <%= f.collection_select :name_eq, @product_name, :name, :name, include_blank: '指定なし' %>
+  <br>
+  <%= f.label :size_eq, 'サイズ：' %>
+  <%= f.collection_select :size_eq, @product_size, :size, :size, include_blank: '指定なし'%>
+  <br>
+  <%= f.label :status_eq, '商品状態：' %>
+  <%= f.collection_select :status_eq, @product_status, :status, :status, include_blank: '指定なし'%>
+  <br>
+  <%= f.label :category_name_eq, 'カテゴリー：' %>
+  <%= f.collection_select :category_name_eq, @category_name, :name, :name, include_blank: '指定なし' %>
+  <br>
+  <%= f.label :price, '価格：' %>
+  <%= f.radio_button :price_lteq, '' %>
+  指定なし
+  <%= f.radio_button :price_lteq, '1000' %>
+  1000円以下
+  <%= f.radio_button :price_lteq, '2500' %>
+  2500円以下
+  <%= f.radio_button :price_lteq, '5000' %>
+  5000円以下
+  <br>
+  <%= f.submit '検索' %>
+  <br>
+  <%# 商品一覧 %>
+  <% @products.each do |product| %>
+  <td>
+  <br>
+  <li>
+    <%= product.name %>
+    <%= product.size %>
+    <%= product.status %>
+    <%= product.price %>
+    <%= product.category.name %>
+  </li>
+  <% end %>
+<% end %>
+
+<%# 4行目、search_form_forの引数に「@p（検索オブジェクト）」を渡すことで検索フォームを生成 %>
+<%# 5行目の「_eq」は条件検索を行うための記述 %>
+<%#「eq」とは「equal（イコール）」の略称で、これにより条件に該当するものを探す %>
+<%# 今回は、「選択した商品名に合致する物」という条件 %>
+<%# 6行目、f.collection_select 第一引数, 第二引数, 第三引数, 第四引数, 第五引数, オプション の順で並ぶ %>
+<%# @productsの情報を配列に入れていましたが、今回は@product_nameの情報（商品名に重複がない）を引数として持たせる %>
+<%# @productの中に全商品の情報が入っているので、eachメソッドを利用して各商品の情報が表示されるようにする %>
+<%# 「_lteq」とは、「〜以下」を意味する。20行目の場合は「1000以下」ということになる %>
