@@ -410,3 +410,40 @@ productsテーブルのsize, statusカラムにおいて、
 また、
 同様の処理をcategoriesテーブルにおいても行うので
 「set_category_column」と命名したものを384行目で実行しています。
+
+
+追加の検索条件をビューに表示しよう
+追加条件用の検索フォームを追記しましょう
+
+app/views/products/index.html.erb
+（省略）
+
+    <%= f.label :name_eq, '商品名：' %>
+    <%= f.collection_select :name_eq, @product_name, :name, :name, include_blank: '指定なし' %>
+    <br>
+    <%= f.label :size_eq, 'サイズ：' %>
+    <%= f.collection_select :size_eq, @product_size, :size, :size, include_blank: '指定なし'%>
+    <br>
+    <%= f.label :status_eq, '商品状態：' %>
+    <%= f.collection_select :status_eq, @product_status, :status, :status, include_blank: '指定なし'%>
+    <br>
+    <%= f.label :category_name_eq, 'カテゴリー：' %>
+    <%= f.collection_select :category_name_eq, @category_name, :name, :name, include_blank: '指定なし' %>
+    <br>
+    <%= f.submit '検索' %>
+    <br>
+
+（省略）
+
+商品名のフォームと同様、
+プルダウンの中に重複がないように、
+「@product_size」「@product_status」「@category_name」を引数として持たせています。
+これらはすべて、コントローラーのprivateメソッド内で定義しています。
+
+ここまで実装できたら、localhost:3000にアクセスして確かめましょう。
+
+最後に価格の条件を設定ですが、
+「radio_button」というメソッドを使用します。
+
+
+
