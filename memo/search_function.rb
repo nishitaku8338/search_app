@@ -365,3 +365,48 @@ eachメソッドを利用して各商品の情報が表示されるようにし�
 ここまで実装できたら、localhost:3000にアクセスして確かめましょう。
 
 
+
+追加の検索条件をコントローラーで処理しよう
+ここまで、商品名だけで商品検索ができる状態でしたが、
+それに加えて「サイズ」「商品状態」「カテゴリー」も検索条件に加えましょう。
+
+実装方法は、商品名検索の時とまったく同じです。
+
+追加条件の処理を行うコードをコントローラーに追記しましょう
+app/controllers/products_controller.rb
+class ProductsController < ApplicationController
+
+  before_action :search_product, only: [:index, :search]
+
+  def index
+    @products = Product.all
+    set_product_column
+    set_category_column
+  end
+
+
+  （省略）
+
+  def set_product_column
+    @product_name = Product.select("name").distinct
+    @product_size = Product.select("size").distinct
+    @product_status = Product.select("status").distinct
+  end
+
+  def set_category_column
+    @category_name = Category.select("name").distinct
+  end
+
+end
+
+productsテーブルのsize, statusカラムにおいて、
+重複しないように明確（distinct）にしたものをそれぞれ
+「@product_size」「@product_status」というインスタンス変数に代入しています。
+
+そして、
+この処理をするメソッドを「set_product_column」と命名したものを
+383行目で実行しています。
+
+また、
+同様の処理をcategoriesテーブルにおいても行うので
+「set_category_column」と命名したものを384行目で実行しています。
