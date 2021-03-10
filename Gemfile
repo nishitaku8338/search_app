@@ -54,3 +54,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'ransack'  # シンプルな検索フォームと高度な検索フォームの作成を可能にするgem
+
+gem 'pry-rails'

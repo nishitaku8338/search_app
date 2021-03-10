@@ -133,3 +133,44 @@ app/views/products/search.html.erb
 https://github.com/activerecord-hackery/ransack
 それでは実装に移りましょう。
 
+
+productsコントローラーを編集しましょう
+以下のように編集してください。
+
+app/controllers/products_controller.rb
+class ProductsController < ApplicationController
+
+  before_action :search_product, only: [:index, :search]
+
+  def index
+    @products = Product.all  # 全商品の情報を取得
+  end
+
+  def search
+    @results = @p.result.includes(:category)  # 検索条件にマッチした商品の情報を取得
+  end
+
+  private
+
+  def search_product
+    @p = Product.ransack(params[:q])  # 検索オブジェクトを生成
+  end
+
+end
+
+
+1つずつ確認します。
+
+6行目では、全商品の情報を取得しています。
+
+次に16行目ですが、キー（:q）を使って、productsテーブルから商品情報を探しています。そして、「@p」という名前の検索オブジェクトを生成しています。
+この処理を行うメソッド名を「search_product」としています。
+また、index, searchアクションのみで使用するので、3行目での「only」で限定しています。
+
+最後に10行目で、この@pに対して「.result」とすることで、検索結果を取得しています。
+これは、検索条件に該当した商品が@pに格納されているので、その格納されている値を表示する役割があります。
+
+以下の画像は、binding.pryをかけて確認したパラメーターの中身です。
+
+binding.pryを使用するには「gem 'pry-rails'」をインストールしましょう。
+また、includesメソッドを使用することで「N+1問題」を解消しています。
