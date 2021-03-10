@@ -299,3 +299,30 @@ localhost:3000にアクセスして確かめましょう。
 
 現状ではどのような商品があるかが分からないままなので、
 検索対象となる商品を一覧表示しましょう。
+
+
+商品の一覧が表示されるようにしましょう
+app/views/products/index.html.erb
+# （省略）
+
+#   <%= f.submit '検索' %>
+#   <br>
+#   <%# 商品一覧 %>
+#   <% @products.each do |product| %>
+#   <td>
+#   <br>
+#   <li>
+#     <%= product.name %>
+#     <%= product.size %>
+#     <%= product.status %>
+#     <%= product.price %>
+#     <%= product.category.name %>
+#   </li>
+#   <% end %>
+# <% end %>
+
+@productの中に全商品の情報が入っているので、
+eachメソッドを利用して各商品の情報が表示されるようにしましょう。
+
+ここまで実装できたら、
+localhost:3000にアクセスして確かめましょう。

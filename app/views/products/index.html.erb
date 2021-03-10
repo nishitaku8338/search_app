@@ -6,6 +6,19 @@
   <%= f.collection_select :name_eq, @product_name, :name, :name, include_blank: '指定なし' %>
   <br>
   <%= f.submit '検索' %>
+  <br>
+  <%# 商品一覧 %>
+  <% @products.each do |product| %>
+  <td>
+  <br>
+  <li>
+    <%= product.name %>
+    <%= product.size %>
+    <%= product.status %>
+    <%= product.price %>
+    <%= product.category.name %>
+  </li>
+  <% end %>
 <% end %>
 
 <%# 4行目、search_form_forの引数に「@p（検索オブジェクト）」を渡すことで検索フォームを生成 %>
@@ -14,3 +27,4 @@
 <%# 今回は、「選択した商品名に合致する物」という条件 %>
 <%# 6行目、f.collection_select 第一引数, 第二引数, 第三引数, 第四引数, 第五引数, オプション の順で並ぶ %>
 <%# @productsの情報を配列に入れていましたが、今回は@product_nameの情報（商品名に重複がない）を引数として持たせる %>
+<%# @productの中に全商品の情報が入っているので、eachメソッドを利用して各商品の情報が表示されるようにする %>
