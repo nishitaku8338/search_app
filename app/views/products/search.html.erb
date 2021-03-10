@@ -1,2 +1,27 @@
-<h1>Products#search</h1>
-<p>Find me in app/views/products/search.html.erb</p>
+<h1>
+  検索結果
+</h2>
+<%# 検索結果の個数で条件分岐 %>
+<% if @results.length !=0 %>
+  <% @results.each do |result| %>
+    <td>
+    <br>
+    <li>
+      <%= result.name %>
+      <%= result.size %>
+      <%= result.status %>
+      <%= result.price %>
+      <%= result.category.name %>
+    </li>
+  <% end %>
+<% else %>
+  該当する商品はありません
+<% end %>
+<br>
+<%= link_to 'トップページへ戻る', root_path %>
+
+<%# 5行目の条件分岐
+@resultsの中に検索結果が配列で格納されています。
+その格納されている個数が0でない場合、
+eachメソッドを利用して各商品の情報が表示されるようにします。
+トップページへのリンクは「root_path」と設定 %>
