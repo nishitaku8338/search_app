@@ -447,3 +447,38 @@ app/views/products/index.html.erb
 
 
 
+radio_button
+「radio_button」とは選択ボタンを設定する事ができます。
+
+価格設定欄を実装しましょう
+app/views/products/index.html.erb
+# （省略）
+
+#   <%= f.label :category_name_eq, 'カテゴリー：' %>
+#   <%= f.collection_select :category_name_eq, @category_name, :name, :name, include_blank: '指定なし' %>
+#   <br>
+#   <%= f.label :price, '価格：' %>
+#   <%= f.radio_button :price_lteq, '' %>
+#   指定なし
+#   <%= f.radio_button :price_lteq, '1000' %>
+#   1000円以下
+#   <%= f.radio_button :price_lteq, '2500' %>
+#   2500円以下
+#   <%= f.radio_button :price_lteq, '5000' %>
+#   5000円以下
+#   <br>
+#   <%= f.submit '検索' %>
+
+# （省略）
+
+ここで登場する「_lteq」とは、
+「〜以下」を意味します。つまり、21行目の場合は「1000以下」ということになります。
+
+ここまで実装できたら、localhost:3000にアクセスして確かめましょう。
+
+
+要点チェック
+「ransack」とは、シンプルな検索フォームと高度な検索フォームの作成を可能にするgemのこと
+「seedファイル」とは、DBへ投入するデータをあらかじめ用意したファイルのこと
+「search_form_for」とは、form_forと非常によく似た使い方をするransack特有の検索フォームのこと
+「collection_select」とは、DBにある情報をプルダウン形式で表示することが出来るメソッドのこと
